@@ -1,4 +1,3 @@
-//import { useState } from 'react';
 import States from '../../data/states.json';
 
 function SelectState() {
@@ -23,4 +22,3 @@ function SelectState() {
 }
 
 export default SelectState;
-
