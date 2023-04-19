@@ -42,11 +42,16 @@ function EmployeesForm() {
         <label htmlFor="last-name">Last Name</label>
         <input type="text" id="last-name" ref={lNameRef} />
 
+        {/* importer le selecteur de date */}
+
         <label htmlFor="date-of-birth">Date of Birth</label>
-        <input id="date-of-birth" type="text" ref={birthRef} />
+        <input id="date-of-birth" type="date" ref={birthRef} />
+
+        {/* importer le selecteur de date */}
 
         <label htmlFor="start-date">Start Date</label>
-        <input id="start-date" type="text" ref={startRef} />
+        <input id="start-date" type="date" ref={startRef} />
+
         <fieldset className="address">
           <legend>Address</legend>
 

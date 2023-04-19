@@ -3,8 +3,6 @@ import States from '../../data/states.json';
 function SelectState() {
   // récupération de la sélection de l'état
   const stateChange = (e) => {
-    console.log('etat', e.target.value);
-    console.log('hi');
     localStorage.setItem('state', e.target.value);
   };
   return (
