@@ -17,6 +17,7 @@ function EmployeesForm() {
     const employees = JSON.parse(localStorage.getItem('employees')) || [];
     e.preventDefault();
     let stateRef = localStorage.getItem('state');
+
     // mise en place des informations des employés dans le localStorage
     const employee = {
       firstName: fNameRef.current.value,
