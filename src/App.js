@@ -3,6 +3,8 @@ import Home from './pages/home';
 import List from './pages/list';
 import './styles/app.css';
 
+/* TEST */
+
 function App() {
   return (
     <div className="App">
