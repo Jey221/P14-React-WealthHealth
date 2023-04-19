@@ -17,6 +17,7 @@ function EmployeesForm() {
     const employees = JSON.parse(localStorage.getItem('employees')) || [];
     e.preventDefault();
     let stateRef = localStorage.getItem('state');
+    // mise en place des informations des employés dans le localStorage
     const employee = {
       firstName: fNameRef.current.value,
       lastName: lNameRef.current.value,
@@ -56,8 +57,6 @@ function EmployeesForm() {
           <input id="city" type="text" ref={cityRef} />
 
           <SelectState />
-          {/* <label htmlFor="state">State</label>
-          <select name="state" id="state"></select> */}
 
           <label htmlFor="zip-code">Zip Code</label>
           <input id="zip-code" type="number" ref={zipCodeRef} />
