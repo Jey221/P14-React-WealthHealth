@@ -14,16 +14,22 @@ function EmployeesForm() {
 
   // envoi du formulaire dans le localStorage
   const handleSubmit = (e) => {
+    const employees = JSON.parse(localStorage.getItem('employees')) || [];
     e.preventDefault();
-    console.log(deptRef.current.value);
-    localStorage.setItem('firstName', fNameRef.current.value);
-    localStorage.setItem('lastName', lNameRef.current.value);
-    localStorage.setItem('birthday', birthRef.current.value);
-    localStorage.setItem('startDate', startRef.current.value);
-    localStorage.setItem('street', streetRef.current.value);
-    localStorage.setItem('city', cityRef.current.value);
-    localStorage.setItem('zip-code', zipCodeRef.current.value);
-    localStorage.setItem('departement', deptRef.current.value);
+    let stateRef = localStorage.getItem('state');
+    const employee = {
+      firstName: fNameRef.current.value,
+      lastName: lNameRef.current.value,
+      birthday: birthRef.current.value,
+      startDate: startRef.current.value,
+      street: streetRef.current.value,
+      city: cityRef.current.value,
+      state: stateRef,
+      zipCode: zipCodeRef.current.value,
+      departement: deptRef.current.value,
+    };
+    employees.push(employee);
+    localStorage.setItem('employees', JSON.stringify(employees));
   };
 
   return (
