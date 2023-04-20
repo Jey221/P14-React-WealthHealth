@@ -1,70 +1,114 @@
-import { useRef } from 'react';
-import SelectState from './SelectState';
+import { useState } from 'react';
+import States from '../../data/states.json';
 
-function EmployeesForm() {
+export default function EmployeesForm({ addEmployee }) {
   // récupération des inputs via useRef()
-  const fNameRef = useRef();
-  const lNameRef = useRef();
-  const birthRef = useRef();
-  const startRef = useRef();
-  const streetRef = useRef();
-  const cityRef = useRef();
-  const zipCodeRef = useRef();
-  const deptRef = useRef();
+  const [employeeInfo, setEmployeeInfo] = useState({
+    firstName: '',
+    lastName: '',
+    birthday: '',
+    startDate: '',
+    street: '',
+    city: '',
+    state: '',
+    zipCode: '',
+    departement: '',
+  });
 
   // envoi du formulaire dans le localStorage
   const handleSubmit = (e) => {
     e.preventDefault();
-    const employees = JSON.parse(localStorage.getItem('employees')) || [];
-    let stateRef = localStorage.getItem('state');
-
-    // mise en place des informations des employés dans le localStorage
-    const employee = {
-      firstName: fNameRef.current.value,
-      lastName: lNameRef.current.value,
-      birthday: birthRef.current.value,
-      startDate: startRef.current.value,
-      street: streetRef.current.value,
-      city: cityRef.current.value,
-      state: stateRef,
-      zipCode: zipCodeRef.current.value,
-      departement: deptRef.current.value,
-    };
-    employees.push(employee);
-    localStorage.setItem('employees', JSON.stringify(employees));
+    addEmployee(employeeInfo);
   };
-
+  const onChange = (e) => {
+    setEmployeeInfo({ ...employeeInfo, [e.target.name]: e.target.value });
+  };
   return (
     <div>
       <form id="createEmployee" onSubmit={handleSubmit}>
         <label htmlFor="first-name">First Name</label>
-        <input type="text" id="first-name" ref={fNameRef} />
+        <input
+          type="text"
+          id="first-name"
+          name="firstName"
+          value={employeeInfo.firstName}
+          onChange={onChange}
+        />
 
         <label htmlFor="last-name">Last Name</label>
-        <input type="text" id="last-name" ref={lNameRef} />
+        <input
+          type="text"
+          id="last-name"
+          name="lastName"
+          value={employeeInfo.lastName}
+          onChange={onChange}
+        />
 
         <label htmlFor="date-of-birth">Date of Birth</label>
-        <input id="date-of-birth" type="date" ref={birthRef} />
+        <input
+          id="date-of-birth"
+          type="date"
+          name="birthday"
+          value={employeeInfo.birthday}
+          onChange={onChange}
+        />
 
         <label htmlFor="start-date">Start Date</label>
-        <input id="start-date" type="date" ref={startRef} />
+        <input
+          id="start-date"
+          type="date"
+          name="startDate"
+          value={employeeInfo.startDate}
+          onChange={onChange}
+        />
 
         <fieldset className="address">
           <legend>Address</legend>
 
           <label htmlFor="street">Street</label>
-          <input id="street" type="text" ref={streetRef} />
+          <input
+            id="street"
+            type="text"
+            name="street"
+            value={employeeInfo.street}
+            onChange={onChange}
+          />
 
           <label htmlFor="city">City</label>
-          <input id="city" type="text" ref={cityRef} />
-
-          <SelectState />
+          <input
+            id="city"
+            type="text"
+            name="city"
+            value={employeeInfo.city}
+            onChange={onChange}
+          />
+          <label htmlFor="state">State</label>
+          <select name="state" id="state" onChange={onChange}>
+            {States.map((state) => {
+              return (
+                <option value={state.abbreviation} key={state.abbreviation}>
+                  {state.name}
+                </option>
+              );
+            })}
+          </select>
 
           <label htmlFor="zip-code">Zip Code</label>
-          <input id="zip-code" type="number" ref={zipCodeRef} />
+          <input
+            id="zip-code"
+            type="number"
+            name="zipCode"
+            value={employeeInfo.zipCode}
+            onChange={onChange}
+          />
         </fieldset>
         <label htmlFor="department">Department</label>
-        <select name="department" id="department" ref={deptRef}>
+        <select
+          name="department"
+          id="department"
+          value={employeeInfo.departement}
+          onChange={onChange}
+        >
           <option>Sales</option>
           <option>Marketing</option>
           <option>Engineering</option>
@@ -76,5 +120,3 @@ function EmployeesForm() {
     </div>
   );
 }
-
-export default EmployeesForm;

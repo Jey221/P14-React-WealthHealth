@@ -1,7 +1,9 @@
-function TableauList() {
-  console.log('list', localStorage.getItem('employees'));
+function TableauList(employees) {
+  /*   console.log('list', localStorage.getItem('employees'));
   const mol = localStorage.getItem('employees');
-  console.log(mol);
+  console.log(mol); */
+
+  console.log('employees table', employees.employees.employees);
   return (
     <div>
       <table className="employeesList">
@@ -19,18 +21,19 @@ function TableauList() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            {/**mettre en place la recup des données saisie//une personne par ligne*/}
-            <td>saisie du form</td>
-            <td>saisie du form</td>
-            <td>saisie du form</td>
-            <td>saisie du form</td>
-            <td>saisie du form</td>
-            <td>saisie du form</td>
-            <td>saisie du form</td>
-            <td>saisie du form</td>
-            <td>saisie du form</td>
-          </tr>
+          {employees.employees.employees.map((employee) => (
+            <tr>
+              <td>{employee.firstName}</td>
+              <td>{employee.lastName}</td>
+              <td>{employee.startDate}</td>
+              <td>{employee.departement}</td>
+              <td>{employee.birthday}</td>
+              <td>{employee.street}</td>
+              <td>{employee.city}</td>
+              <td>{employee.city}</td>
+              <td>{employee.zipCode}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

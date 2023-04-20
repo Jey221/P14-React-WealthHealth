@@ -2,15 +2,21 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './pages/home';
 import List from './pages/list';
 import './styles/app.css';
+import { useState } from 'react';
 
 /* TEST */
 
 function App() {
+  const [employees, updateEmployees] = useState([]);
+  const addEmployee = (employeeInfo) => {
+    updateEmployees([...employees, employeeInfo]);
+  };
+  console.log(employees);
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/list" element={<List />} />
+        <Route path="/" element={<Home addEmployee={addEmployee} />} />
+        <Route path="/list" element={<List employees={employees} />} />
       </Routes>
     </div>
   );
