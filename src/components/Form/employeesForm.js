@@ -14,8 +14,8 @@ function EmployeesForm() {
 
   // envoi du formulaire dans le localStorage
   const handleSubmit = (e) => {
-    const employees = JSON.parse(localStorage.getItem('employees')) || [];
     e.preventDefault();
+    const employees = JSON.parse(localStorage.getItem('employees')) || [];
     let stateRef = localStorage.getItem('state');
 
     // mise en place des informations des employés dans le localStorage
@@ -43,12 +43,8 @@ function EmployeesForm() {
         <label htmlFor="last-name">Last Name</label>
         <input type="text" id="last-name" ref={lNameRef} />
 
-        {/* importer le selecteur de date */}
-
         <label htmlFor="date-of-birth">Date of Birth</label>
         <input id="date-of-birth" type="date" ref={birthRef} />
-
-        {/* importer le selecteur de date */}
 
         <label htmlFor="start-date">Start Date</label>
         <input id="start-date" type="date" ref={startRef} />
