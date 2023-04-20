@@ -10,23 +10,32 @@ export default function EmployeesForm({ addEmployee }) {
     startDate: '',
     street: '',
     city: '',
-    state: '',
+    state: 'AL',
     zipCode: '',
-    departement: '',
+    departement: 'Sales',
   });
 
   // envoi du formulaire dans le localStorage
   const handleSubmit = (e) => {
     e.preventDefault();
     addEmployee(employeeInfo);
-    console.log('avt', employeeInfo);
+    setEmployeeInfo({
+      firstName: '',
+      lastName: '',
+      birthday: '',
+      startDate: '',
+      street: '',
+      city: '',
+      zipCode: '',
+      departement: '',
+    });
   };
   const onChange = (e) => {
     setEmployeeInfo({ ...employeeInfo, [e.target.name]: e.target.value });
   };
   return (
     <div>
-      <form id="createEmployee" onSubmit={handleSubmit}>
+      <form id="createEmployee" name="employeeForm" onSubmit={handleSubmit}>
         <label htmlFor="first-name">First Name</label>
         <input
           type="text"
@@ -103,10 +112,10 @@ export default function EmployeesForm({ addEmployee }) {
             onChange={onChange}
           />
         </fieldset>
-        <label htmlFor="department">Department</label>
+        <label htmlFor="departement">Department</label>
         <select
-          name="department"
-          id="department"
+          name="departement"
+          id="departement"
           value={employeeInfo.departement}
           onChange={onChange}
         >
@@ -116,9 +125,7 @@ export default function EmployeesForm({ addEmployee }) {
           <option>Human Resources</option>
           <option>Legal</option>
         </select>
-        <button type={'submit'} onClick={Reset}>
-          Save
-        </button>
+        <button type={'submit'}>Save</button>
       </form>
     </div>
   );

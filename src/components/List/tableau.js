@@ -1,9 +1,6 @@
 function TableauList(employees) {
-  /*   console.log('list', localStorage.getItem('employees'));
-  const mol = localStorage.getItem('employees');
-  console.log(mol); */
-
   console.log('employees table', employees.employees.employees);
+
   return (
     <div>
       <table className="employeesList">
@@ -12,7 +9,7 @@ function TableauList(employees) {
             <th>First Name</th>
             <th>Last Name</th>
             <th>Start Date</th>
-            <th>Department</th>
+            <th>Departement</th>
             <th>Date of Birth</th>
             <th>Street</th>
             <th>City</th>

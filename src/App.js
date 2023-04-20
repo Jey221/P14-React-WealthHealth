@@ -11,7 +11,6 @@ function App() {
   const addEmployee = (employeeInfo) => {
     updateEmployees([...employees, employeeInfo]);
   };
-  console.log(employees);
   return (
     <div className="App">
       <Routes>
