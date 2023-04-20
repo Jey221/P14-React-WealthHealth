@@ -22,7 +22,7 @@ function TableauList(employees) {
         </thead>
         <tbody>
           {employees.employees.employees.map((employee) => (
-            <tr>
+            <tr className="employeeList" key={employee.lastName}>
               <td>{employee.firstName}</td>
               <td>{employee.lastName}</td>
               <td>{employee.startDate}</td>
@@ -30,7 +30,7 @@ function TableauList(employees) {
               <td>{employee.birthday}</td>
               <td>{employee.street}</td>
               <td>{employee.city}</td>
-              <td>{employee.city}</td>
+              <td>{employee.state}</td>
               <td>{employee.zipCode}</td>
             </tr>
           ))}

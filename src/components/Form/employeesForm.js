@@ -19,6 +19,7 @@ export default function EmployeesForm({ addEmployee }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     addEmployee(employeeInfo);
+    console.log('avt', employeeInfo);
   };
   const onChange = (e) => {
     setEmployeeInfo({ ...employeeInfo, [e.target.name]: e.target.value });
@@ -115,7 +116,9 @@ export default function EmployeesForm({ addEmployee }) {
           <option>Human Resources</option>
           <option>Legal</option>
         </select>
-        <button type={'submit'}>Save</button>
+        <button type={'submit'} onClick={Reset}>
+          Save
+        </button>
       </form>
     </div>
   );
