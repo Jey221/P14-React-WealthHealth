@@ -30,9 +30,11 @@ export default function EmployeesForm({ addEmployee }) {
       departement: '',
     });
   };
+  // ecouteur sur la saisie
   const onChange = (e) => {
     setEmployeeInfo({ ...employeeInfo, [e.target.name]: e.target.value });
   };
+
   return (
     <div>
       <form id="createEmployee" name="employeeForm" onSubmit={handleSubmit}>

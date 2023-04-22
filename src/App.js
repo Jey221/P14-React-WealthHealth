@@ -4,8 +4,6 @@ import List from './pages/list';
 import './styles/app.css';
 import { useState } from 'react';
 
-/* TEST */
-
 function App() {
   const [employees, updateEmployees] = useState([]);
   const addEmployee = (employeeInfo) => {

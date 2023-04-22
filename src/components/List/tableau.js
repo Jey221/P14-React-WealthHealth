@@ -1,8 +1,41 @@
+import { useState } from 'react';
+
 function TableauList(employees) {
-  console.log('employees table', employees.employees.employees);
+  // mise en place hook pour la saisie ds la barre de recherche
+  const [searchField, setSearchField] = useState('');
+  // création de la liste des employées filtrés
+  const filteredEmployees = employees.employees.employees.filter((employee) => {
+    return (
+      employee.firstName
+        .toLowerCase()
+        .includes(searchField.toLocaleLowerCase()) ||
+      employee.lastName
+        .toLowerCase()
+        .includes(searchField.toLocaleLowerCase()) ||
+      employee.departement
+        .toLowerCase()
+        .includes(searchField.toLocaleLowerCase()) ||
+      employee.city.toLowerCase().includes(searchField.toLocaleLowerCase()) ||
+      employee.state.toLowerCase().includes(searchField.toLocaleLowerCase()) ||
+      employee.street.toLowerCase().includes(searchField.toLocaleLowerCase()) ||
+      employee.startDate.includes(searchField.toLocaleLowerCase()) ||
+      employee.birthday.includes(searchField.toLocaleLowerCase()) ||
+      employee.zipCode.includes(searchField.toLocaleLowerCase())
+    );
+  });
+  //écouteur sur la barre de saisie
+  const searchChange = (e) => {
+    setSearchField(e.target.value);
+  };
 
   return (
     <div>
+      <div>
+        <p>Search:</p>
+      </div>
+      <div>
+        <input className="searchBar" type="search" onChange={searchChange} />
+      </div>
       <table className="employeesList">
         <thead>
           <tr>
@@ -18,7 +51,7 @@ function TableauList(employees) {
           </tr>
         </thead>
         <tbody>
-          {employees.employees.employees.map((employee) => (
+          {filteredEmployees.map((employee) => (
             <tr className="employeeList" key={employee.lastName}>
               <td>{employee.firstName}</td>
               <td>{employee.lastName}</td>
@@ -33,6 +66,11 @@ function TableauList(employees) {
           ))}
         </tbody>
       </table>
+      <div className="indexEmployees">
+        <p>
+          Showing 1 to {filteredEmployees.length} of {filteredEmployees.length}
+        </p>
+      </div>
     </div>
   );
 }
