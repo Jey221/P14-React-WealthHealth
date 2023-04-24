@@ -1,12 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Typography } from '@mui/material';
 import EmployeesForm from '../components/Form/employeesForm';
 
 function Home({ addEmployee }) {
   return (
-    <div>
-      <h1>HRnet</h1>
-      <Link to={'/list'}>View Current Employees</Link>
-      <h2>Create Employee</h2>
+    <div className="formulaire">
+      <Typography variant="h5">Create Employee</Typography>
       <EmployeesForm addEmployee={addEmployee} />
     </div>
   );

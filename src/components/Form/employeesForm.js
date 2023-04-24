@@ -1,5 +1,25 @@
 import { useState } from 'react';
 import States from '../../data/states.json';
+import { Typography } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+
+/* 
+
+
+export default function CustomColor() {
+  return (
+  );
+} */
+
+const theme = createTheme({
+  palette: {
+    neutral: {
+      main: '#354104',
+      contrastText: '#fff',
+    },
+  },
+});
 
 export default function EmployeesForm({ addEmployee }) {
   // récupération des inputs via useRef()
@@ -38,96 +58,105 @@ export default function EmployeesForm({ addEmployee }) {
   return (
     <div>
       <form id="createEmployee" name="employeeForm" onSubmit={handleSubmit}>
-        <label htmlFor="first-name">First Name</label>
-        <input
-          type="text"
-          id="first-name"
-          name="firstName"
-          value={employeeInfo.firstName}
-          onChange={onChange}
-        />
-
-        <label htmlFor="last-name">Last Name</label>
-        <input
-          type="text"
-          id="last-name"
-          name="lastName"
-          value={employeeInfo.lastName}
-          onChange={onChange}
-        />
-
-        <label htmlFor="date-of-birth">Date of Birth</label>
-        <input
-          id="date-of-birth"
-          type="date"
-          name="birthday"
-          value={employeeInfo.birthday}
-          onChange={onChange}
-        />
-
-        <label htmlFor="start-date">Start Date</label>
-        <input
-          id="start-date"
-          type="date"
-          name="startDate"
-          value={employeeInfo.startDate}
-          onChange={onChange}
-        />
-
-        <fieldset className="address">
-          <legend>Address</legend>
-
-          <label htmlFor="street">Street</label>
+        <Typography className="form">
+          <label htmlFor="first-name">First Name</label>
           <input
-            id="street"
             type="text"
-            name="street"
-            value={employeeInfo.street}
+            id="first-name"
+            name="firstName"
+            value={employeeInfo.firstName}
             onChange={onChange}
           />
 
-          <label htmlFor="city">City</label>
+          <label htmlFor="last-name">Last Name</label>
           <input
-            id="city"
             type="text"
-            name="city"
-            value={employeeInfo.city}
+            id="last-name"
+            name="lastName"
+            value={employeeInfo.lastName}
             onChange={onChange}
           />
-          <label htmlFor="state">State</label>
-          <select name="state" id="state" onChange={onChange}>
-            {States.map((state) => {
-              return (
-                <option value={state.abbreviation} key={state.abbreviation}>
-                  {state.name}
-                </option>
-              );
-            })}
+
+          <label htmlFor="date-of-birth">Date of Birth</label>
+          <input
+            id="date-of-birth"
+            type="date"
+            name="birthday"
+            value={employeeInfo.birthday}
+            onChange={onChange}
+          />
+
+          <label htmlFor="start-date">Start Date</label>
+          <input
+            id="start-date"
+            type="date"
+            name="startDate"
+            value={employeeInfo.startDate}
+            onChange={onChange}
+          />
+          <label htmlFor="departement">Department</label>
+          <select
+            name="departement"
+            id="departement"
+            value={employeeInfo.departement}
+            onChange={onChange}
+          >
+            <option>Sales</option>
+            <option>Marketing</option>
+            <option>Engineering</option>
+            <option>Human Resources</option>
+            <option>Legal</option>
           </select>
+        </Typography>
 
-          <label htmlFor="zip-code">Zip Code</label>
-          <input
-            id="zip-code"
-            type="number"
-            name="zipCode"
-            value={employeeInfo.zipCode}
-            onChange={onChange}
-          />
+        <fieldset>
+          <legend>
+            <Typography variant="subtitle2">Address</Typography>
+          </legend>
+          <Typography className="address">
+            <label htmlFor="street">Street</label>
+            <input
+              id="street"
+              type="text"
+              name="street"
+              value={employeeInfo.street}
+              onChange={onChange}
+            />
+
+            <label htmlFor="city">City</label>
+            <input
+              id="city"
+              type="text"
+              name="city"
+              value={employeeInfo.city}
+              onChange={onChange}
+            />
+            <label htmlFor="state">State</label>
+            <select name="state" id="state" onChange={onChange}>
+              {States.map((state) => {
+                return (
+                  <option value={state.abbreviation} key={state.abbreviation}>
+                    {state.name}
+                  </option>
+                );
+              })}
+            </select>
+
+            <label htmlFor="zip-code">Zip Code</label>
+            <input
+              id="zip-code"
+              type="number"
+              name="zipCode"
+              value={employeeInfo.zipCode}
+              onChange={onChange}
+            />
+          </Typography>
         </fieldset>
-        <label htmlFor="departement">Department</label>
-        <select
-          name="departement"
-          id="departement"
-          value={employeeInfo.departement}
-          onChange={onChange}
-        >
-          <option>Sales</option>
-          <option>Marketing</option>
-          <option>Engineering</option>
-          <option>Human Resources</option>
-          <option>Legal</option>
-        </select>
-        <button type={'submit'}>Save</button>
+        <ThemeProvider theme={theme}>
+          <Button color="neutral" variant="contained" type={'submit'}>
+            Save
+          </Button>
+        </ThemeProvider>
       </form>
     </div>
   );
