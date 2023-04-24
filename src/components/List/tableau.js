@@ -55,13 +55,13 @@ const TableauList = (employee) => {
       muiTableBodyRowProps={{
         hover: false,
         sx: {
-          backgroundColor: 'rgba(147, 173, 24)',
+          backgroundColor: 'rgba(147, 173, 24,0.77)',
           borderRight: '1px solid rgba(255, 255, 255)',
         },
       }}
       muiTableHeadCellProps={{
         sx: (theme) => ({
-          background: 'rgba(90, 111, 8)',
+          background: 'rgba(90, 111, 8,0.77)',
           borderRight: '1px solid rgba(224,224,224,1)',
           color: theme.palette.text.primary,
         }),
