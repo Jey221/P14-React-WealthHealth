@@ -1,5 +1,5 @@
-import Table from '../components/List/table';
-import TableauList from '../components/List/tableau';
+import Table from '../components/List/packTable/table';
+// import TableauList from '../components/List/tableau';
 
 function List(employees) {
   return (
