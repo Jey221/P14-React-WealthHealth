@@ -88,6 +88,7 @@ export default function EmployeesForm({ addEmployee }) {
             name="firstName"
             value={employeeInfo.firstName}
             onChange={onChange}
+            required
           />
 
           <label htmlFor="last-name">Last Name</label>
@@ -97,6 +98,7 @@ export default function EmployeesForm({ addEmployee }) {
             name="lastName"
             value={employeeInfo.lastName}
             onChange={onChange}
+            required
           />
 
           <label htmlFor="date-of-birth">Date of Birth</label>
@@ -106,6 +108,7 @@ export default function EmployeesForm({ addEmployee }) {
             name="birthday"
             value={employeeInfo.birthday}
             onChange={onChange}
+            required
           />
 
           <label htmlFor="start-date">Start Date</label>
@@ -115,6 +118,7 @@ export default function EmployeesForm({ addEmployee }) {
             name="startDate"
             value={employeeInfo.startDate}
             onChange={onChange}
+            required
           />
           <label htmlFor="departement">Department</label>
           <select
@@ -122,6 +126,7 @@ export default function EmployeesForm({ addEmployee }) {
             id="departement"
             value={employeeInfo.departement}
             onChange={onChange}
+            required
           >
             <option>Sales</option>
             <option>Marketing</option>
@@ -143,6 +148,7 @@ export default function EmployeesForm({ addEmployee }) {
               name="street"
               value={employeeInfo.street}
               onChange={onChange}
+              required
             />
 
             <label htmlFor="city">City</label>
@@ -152,9 +158,10 @@ export default function EmployeesForm({ addEmployee }) {
               name="city"
               value={employeeInfo.city}
               onChange={onChange}
+              required
             />
             <label htmlFor="state">State</label>
-            <select name="state" id="state" onChange={onChange}>
+            <select name="state" id="state" onChange={onChange} required>
               {States.map((state) => {
                 return (
                   <option value={state.abbreviation} key={state.abbreviation}>
@@ -171,6 +178,7 @@ export default function EmployeesForm({ addEmployee }) {
               name="zipCode"
               value={employeeInfo.zipCode}
               onChange={onChange}
+              required
             />
           </Typography>
         </fieldset>

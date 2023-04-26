@@ -1,39 +1,39 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
-function Table(employees) {
-  // mise en forme du tableau
-  const TableEmployee = styled.div`
-    background-color: #80808085;
-    margin: auto;
-    width: 900px;
-    border-radius: 20px;
-  `;
-  const SearchZone = styled.div`
-    background-color: #35410480;
-    border-radius: 20px 20px 0 0;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 1%;
-  `;
-  const TableList = styled.table`
-    background-color: #354104;
-    margin-top: 3%;
-    margin: auto;
-  `;
-  const TableHead = styled.thead`
-    background-color: #354104;
-    color: #93ad18;
-  `;
-  const TableBody = styled.tbody`
-    background-color: #b3d31da3;
-  `;
-  const IndexEmployees = styled.div`
-    display: flex;
-    justify-content: flex-end;
-  `;
+// mise en forme du tableau
+const TableEmployee = styled.div`
+  background-color: #80808085;
+  margin: auto;
+  width: 900px;
+  border-radius: 20px;
+`;
+const SearchZone = styled.div`
+  background-color: #35410480;
+  border-radius: 20px 20px 0 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 1%;
+`;
+const TableList = styled.table`
+  background-color: #354104;
+  margin-top: 3%;
+  margin: auto;
+`;
+const TableHead = styled.thead`
+  background-color: #354104;
+  color: #93ad18;
+`;
+const TableBody = styled.tbody`
+  background-color: #b3d31da3;
+`;
+const IndexEmployees = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
 
+function Table(employees) {
   // mise en place hook pour la saisie ds la barre de recherche
   const [searchField, setSearchField] = useState('');
 
@@ -58,6 +58,7 @@ function Table(employees) {
 
   //écouteur sur la barre de saisie
   const searchChange = (e) => {
+    console.log(e);
     setSearchField(e.target.value);
   };
 
