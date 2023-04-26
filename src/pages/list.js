@@ -1,9 +1,11 @@
+import Table from '../components/List/table';
 import TableauList from '../components/List/tableau';
 
 function List(employees) {
   return (
     <div className="List">
-      <TableauList employees={employees} />
+      {/* <TableauList employees={employees} /> */}
+      <Table employees={employees} />
     </div>
   );
 }
