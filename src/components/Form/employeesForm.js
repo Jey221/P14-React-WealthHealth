@@ -4,14 +4,6 @@ import { Box, Modal, Typography } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 
-/* 
-
-
-export default function CustomColor() {
-  return (
-  );
-} */
-
 const theme = createTheme({
   palette: {
     neutral: {
@@ -22,7 +14,7 @@ const theme = createTheme({
 });
 
 export default function EmployeesForm({ addEmployee }) {
-  // récupération des inputs via useRef()
+  // récupération des inputs via useState()
   const [employeeInfo, setEmployeeInfo] = useState({
     firstName: '',
     lastName: '',

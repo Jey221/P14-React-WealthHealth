@@ -32,13 +32,12 @@ const IndexEmployees = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
-
 function Table(employees) {
+  const listEmployees = employees.employees.employees;
   // mise en place hook pour la saisie ds la barre de recherche
   const [searchField, setSearchField] = useState('');
-
   // création de la liste des employées filtrés
-  const filteredEmployees = employees.employees.employees.filter((employee) => {
+  const filteredEmployees = listEmployees.filter((employee) => {
     return (
       employee.firstName
         .toLowerCase()
@@ -61,7 +60,6 @@ function Table(employees) {
     console.log(e);
     setSearchField(e.target.value);
   };
-
   return (
     <TableEmployee>
       <SearchZone>
