@@ -18,8 +18,8 @@ const SearchZone = styled.div`
 `;
 const TableList = styled.table`
   background-color: #354104;
-  margin-top: 3%;
   margin: auto;
+  margin-top: 3%;
 `;
 const TableHead = styled.thead`
   background-color: #354104;
@@ -31,9 +31,12 @@ const TableBody = styled.tbody`
 const IndexEmployees = styled.div`
   display: flex;
   justify-content: flex-end;
+  padding: 0 3%;
 `;
+
 function Table(employees) {
   const listEmployees = employees.employees.employees;
+
   // mise en place hook pour la saisie ds la barre de recherche
   const [searchField, setSearchField] = useState('');
   // création de la liste des employées filtrés
@@ -57,9 +60,33 @@ function Table(employees) {
 
   //écouteur sur la barre de saisie
   const searchChange = (e) => {
-    console.log(e);
     setSearchField(e.target.value);
   };
+  //tri firstName
+  console.log('1', filteredEmployees);
+  const sortFName = (e) => {
+    console.log(
+      '2',
+      filteredEmployees.sort((a, b) => a.firstName.localeCompare(b.firstName))
+    );
+  };
+  console.log('3', filteredEmployees);
+
+  /* 
+// fonction de tri par Popularité (+ de like à - de like )
+const popularitySort = (tabMedia) => {
+  tabMedia.sort((a, b) => b.likes - a.likes);
+};
+// fonction de tri par date (+ ancien au + récent)
+const dateSort = (tabMedia) => {
+  tabMedia.sort((a, b) => new Date(a.date) - new Date(b.date));
+};
+// fonction de tri par titre (ordre alphabétique)
+const titleSort = (tabMedia) => {
+  tabMedia.sort((a, b) => a.title.localeCompare(b.title));
+};
+ */
+
   return (
     <TableEmployee>
       <SearchZone>
@@ -74,7 +101,13 @@ function Table(employees) {
       <TableList>
         <TableHead>
           <tr>
-            <th>First Name</th>
+            <th onClick={sortFName}>
+              First Name{' '}
+              <span>
+                <i class="fa-solid fa-sort-up"></i>
+                <i class="fa-solid fa-sort-down"></i>
+              </span>
+            </th>
             <th>Last Name</th>
             <th>Start Date</th>
             <th>Departement</th>
