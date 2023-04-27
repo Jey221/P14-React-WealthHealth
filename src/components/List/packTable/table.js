@@ -25,6 +25,15 @@ const TableHead = styled.thead`
   background-color: #354104;
   color: #93ad18;
 `;
+const Headers = styled.th`
+  display: flex;
+  align-items: center;
+`;
+const Icons = styled.span`
+  display: flex;
+  flex-direction: column;
+  margin: 0% 3%;
+`;
 const TableBody = styled.tbody`
   background-color: #b3d31da3;
 `;
@@ -101,13 +110,13 @@ const titleSort = (tabMedia) => {
       <TableList>
         <TableHead>
           <tr>
-            <th onClick={sortFName}>
+            <Headers onClick={sortFName}>
               First Name{' '}
-              <span>
+              <Icons>
                 <i class="fa-solid fa-sort-up"></i>
                 <i class="fa-solid fa-sort-down"></i>
-              </span>
-            </th>
+              </Icons>
+            </Headers>
             <th>Last Name</th>
             <th>Start Date</th>
             <th>Departement</th>
@@ -144,3 +153,8 @@ const titleSort = (tabMedia) => {
 }
 
 export default Table;
+
+/* module.exports = {
+  EmployeesList: Table,
+};
+ */

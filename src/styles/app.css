@@ -91,6 +91,14 @@ fieldset {
   overflow: hidden;
   padding: 3% 2%;
 }
+.fa-sort-up {
+  width: 15px;
+  margin-bottom: -6px;
+}
+.fa-sort-down {
+  width: 15px;
+  margin-top: -6px;
+}
 
 /*FOOTER*/
 .Footer {
