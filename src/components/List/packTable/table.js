@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const TableEmployee = styled.div`
   background-color: #80808085;
   margin: auto;
-  width: 900px;
+  width: 1062px;
   border-radius: 20px;
 `;
 const SearchZone = styled.div`
@@ -26,9 +26,15 @@ const TableHead = styled.thead`
   color: #93ad18;
 `;
 const Headers = styled.th`
-  display: flex;
   align-items: center;
 `;
+
+const HeadersZone = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const Icons = styled.span`
   display: flex;
   flex-direction: column;
@@ -71,30 +77,47 @@ function Table(employees) {
   const searchChange = (e) => {
     setSearchField(e.target.value);
   };
-  //tri firstName
-  console.log('1', filteredEmployees);
-  const sortFName = (e) => {
-    console.log(
-      '2',
-      filteredEmployees.sort((a, b) => a.firstName.localeCompare(b.firstName))
-    );
-  };
-  console.log('3', filteredEmployees);
 
-  /* 
-// fonction de tri par Popularité (+ de like à - de like )
-const popularitySort = (tabMedia) => {
-  tabMedia.sort((a, b) => b.likes - a.likes);
-};
-// fonction de tri par date (+ ancien au + récent)
-const dateSort = (tabMedia) => {
-  tabMedia.sort((a, b) => new Date(a.date) - new Date(b.date));
-};
-// fonction de tri par titre (ordre alphabétique)
-const titleSort = (tabMedia) => {
-  tabMedia.sort((a, b) => a.title.localeCompare(b.title));
-};
- */
+  //tri via entête du tableau
+  const [sortConfig, setSortConfig] = useState({
+    key: null,
+    direction: 'ascending',
+  });
+
+  // fonction au click
+  const handleSort = (key) => {
+    console.log(key);
+    let direction = 'ascending';
+    if (sortConfig.key === key && sortConfig.direction === 'ascending') {
+      direction = 'descending';
+    }
+    setSortConfig({ key, direction });
+  };
+
+  //fonction de tri selon entête de colonne
+  const sortedData = () => {
+    let sortedData = [...filteredEmployees];
+    if (sortConfig !== null) {
+      sortedData.sort((a, b) => {
+        if (
+          typeof a[sortConfig.key] === 'string' &&
+          typeof b[sortConfig.key] === 'string'
+        ) {
+          return sortConfig.direction === 'ascending'
+            ? a[sortConfig.key].localeCompare(b[sortConfig.key])
+            : b[sortConfig.key].localeCompare(a[sortConfig.key]);
+        }
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? 1 : -1;
+        }
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? -1 : 1;
+        }
+        return 0;
+      });
+    }
+    return sortedData;
+  };
 
   return (
     <TableEmployee>
@@ -110,26 +133,92 @@ const titleSort = (tabMedia) => {
       <TableList>
         <TableHead>
           <tr>
-            <Headers onClick={sortFName}>
-              First Name{' '}
-              <Icons>
-                <i class="fa-solid fa-sort-up"></i>
-                <i class="fa-solid fa-sort-down"></i>
-              </Icons>
+            <Headers onClick={() => handleSort('firstName')}>
+              <HeadersZone>
+                First Name
+                <Icons>
+                  <i className="fa-solid fa-sort-up"></i>
+                  <i className="fa-solid fa-sort-down"></i>
+                </Icons>
+              </HeadersZone>
             </Headers>
-            <th>Last Name</th>
-            <th>Start Date</th>
-            <th>Departement</th>
-            <th>Date of Birth</th>
-            <th>Street</th>
-            <th>City</th>
-            <th>State</th>
-            <th>zip Code</th>
+            <Headers onClick={() => handleSort('lastName')}>
+              <HeadersZone>
+                Last Name
+                <Icons>
+                  <i className="fa-solid fa-sort-up"></i>
+                  <i className="fa-solid fa-sort-down"></i>
+                </Icons>
+              </HeadersZone>
+            </Headers>
+            <Headers onClick={() => handleSort('startDate')}>
+              <HeadersZone>
+                Start Date
+                <Icons>
+                  <i className="fa-solid fa-sort-up"></i>
+                  <i className="fa-solid fa-sort-down"></i>
+                </Icons>
+              </HeadersZone>
+            </Headers>
+            <Headers onClick={() => handleSort('departement')}>
+              <HeadersZone>
+                Departement{' '}
+                <Icons>
+                  <i className="fa-solid fa-sort-up"></i>
+                  <i className="fa-solid fa-sort-down"></i>
+                </Icons>
+              </HeadersZone>
+            </Headers>
+            <Headers onClick={() => handleSort('birthday')}>
+              <HeadersZone>
+                Date of Birth{' '}
+                <Icons>
+                  <i className="fa-solid fa-sort-up"></i>
+                  <i className="fa-solid fa-sort-down"></i>
+                </Icons>
+              </HeadersZone>
+            </Headers>
+            <Headers onClick={() => handleSort('street')}>
+              <HeadersZone>
+                Street{' '}
+                <Icons>
+                  <i className="fa-solid fa-sort-up"></i>
+                  <i className="fa-solid fa-sort-down"></i>
+                </Icons>
+              </HeadersZone>
+            </Headers>
+            <Headers onClick={() => handleSort('city')}>
+              <HeadersZone>
+                City{' '}
+                <Icons>
+                  <i className="fa-solid fa-sort-up"></i>
+                  <i className="fa-solid fa-sort-down"></i>
+                </Icons>
+              </HeadersZone>
+            </Headers>
+            <Headers onClick={() => handleSort('state')}>
+              <HeadersZone>
+                State{' '}
+                <Icons>
+                  <i className="fa-solid fa-sort-up"></i>
+                  <i className="fa-solid fa-sort-down"></i>
+                </Icons>
+              </HeadersZone>
+            </Headers>
+            <Headers onClick={() => handleSort('zipCode')}>
+              <HeadersZone>
+                zip Code{' '}
+                <Icons>
+                  <i className="fa-solid fa-sort-up"></i>
+                  <i className="fa-solid fa-sort-down"></i>
+                </Icons>
+              </HeadersZone>
+            </Headers>
           </tr>
         </TableHead>
-        <TableBody>
-          {filteredEmployees.map((employee) => (
-            <tr className="employeeList" key={employee.lastName}>
+        <TableBody id="tableContent">
+          {sortedData().map((employee) => (
+            <tr className="employeeList" key={employee.firstName}>
               <td>{employee.firstName}</td>
               <td>{employee.lastName}</td>
               <td>{employee.startDate}</td>
@@ -157,4 +246,35 @@ export default Table;
 /* module.exports = {
   EmployeesList: Table,
 };
+ */
+/* 
+// fonction de tri par Popularité (+ de like à - de like )
+    filteredEmployees.sort((a, b) => a.firstName.localeCompare(b.firstName));
+
+const popularitySort = (tabMedia) => {
+  tabMedia.sort((a, b) => b.likes - a.likes);
+};
+// fonction de tri par date (+ ancien au + récent)
+const dateSort = (tabMedia) => {
+  tabMedia.sort((a, b) => new Date(a.date) - new Date(b.date));
+};
+// fonction de tri par titre (ordre alphabétique)
+const titleSort = (tabMedia) => {
+  tabMedia.sort((a, b) => a.title.localeCompare(b.title));
+};
+ */
+
+/*   const sortFName = (e) => {
+    console.log(
+      'order',
+      filteredEmployees.sort((a, b) => a.firstName.localeCompare(b.firstName))
+    );
+
+    /*     console.log(
+      'no order',
+      filteredEmployees.sort((a, b) => b.firstName.localeCompare(a.firstName))
+    );
+ 
+    // tableContent.innerHTML = '';
+  };
  */
