@@ -5,7 +5,8 @@ import styled from 'styled-components';
 const TableEmployee = styled.div`
   background-color: #80808085;
   margin: auto;
-  width: 1062px;
+  min-width: 925px;
+  max-width: 1062px;
   border-radius: 20px;
 `;
 const SearchZone = styled.div`
@@ -28,13 +29,11 @@ const TableHead = styled.thead`
 const Headers = styled.th`
   align-items: center;
 `;
-
 const HeadersZone = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
 `;
-
 const Icons = styled.span`
   display: flex;
   flex-direction: column;
@@ -49,12 +48,15 @@ const IndexEmployees = styled.div`
   padding: 0 3%;
 `;
 
+// Mise en place du tableau et des fonctionnalités liées (Recherche, Tri, Pagination)
 function Table(employees) {
+  // récupération des datas
   const listEmployees = employees.employees.employees;
 
   // mise en place hook pour la saisie ds la barre de recherche
   const [searchField, setSearchField] = useState('');
-  // création de la liste des employées filtrés
+
+  // création de la liste des employés filtrés
   const filteredEmployees = listEmployees.filter((employee) => {
     return (
       employee.firstName
@@ -78,20 +80,29 @@ function Table(employees) {
     setSearchField(e.target.value);
   };
 
-  //tri via entête du tableau
+  //mise en place d'un hook pour configurer le tri
   const [sortConfig, setSortConfig] = useState({
     key: null,
     direction: 'ascending',
   });
 
-  // fonction au click
+  // écouteur sur entête de colonne et définition des directions de tri
   const handleSort = (key) => {
-    console.log(key);
     let direction = 'ascending';
     if (sortConfig.key === key && sortConfig.direction === 'ascending') {
       direction = 'descending';
     }
     setSortConfig({ key, direction });
+  };
+
+  // fonction pour modifier le sens de l'indicateur de tri
+  const getIconClass = (headerKey) => {
+    if (sortConfig.key === headerKey) {
+      return sortConfig.direction === 'ascending'
+        ? 'fa-sort-up'
+        : 'fa-sort-down';
+    }
+    return 'hidden';
   };
 
   //fonction de tri selon entête de colonne
@@ -137,8 +148,7 @@ function Table(employees) {
               <HeadersZone>
                 First Name
                 <Icons>
-                  <i className="fa-solid fa-sort-up"></i>
-                  <i className="fa-solid fa-sort-down"></i>
+                  <i className={`fa-solid ${getIconClass('firstName')}`} />
                 </Icons>
               </HeadersZone>
             </Headers>
@@ -146,8 +156,7 @@ function Table(employees) {
               <HeadersZone>
                 Last Name
                 <Icons>
-                  <i className="fa-solid fa-sort-up"></i>
-                  <i className="fa-solid fa-sort-down"></i>
+                  <i className={`fa-solid ${getIconClass('lastName')}`} />
                 </Icons>
               </HeadersZone>
             </Headers>
@@ -155,8 +164,7 @@ function Table(employees) {
               <HeadersZone>
                 Start Date
                 <Icons>
-                  <i className="fa-solid fa-sort-up"></i>
-                  <i className="fa-solid fa-sort-down"></i>
+                  <i className={`fa-solid ${getIconClass('startDate')}`} />
                 </Icons>
               </HeadersZone>
             </Headers>
@@ -164,8 +172,7 @@ function Table(employees) {
               <HeadersZone>
                 Departement{' '}
                 <Icons>
-                  <i className="fa-solid fa-sort-up"></i>
-                  <i className="fa-solid fa-sort-down"></i>
+                  <i className={`fa-solid ${getIconClass('departement')}`} />
                 </Icons>
               </HeadersZone>
             </Headers>
@@ -173,8 +180,7 @@ function Table(employees) {
               <HeadersZone>
                 Date of Birth{' '}
                 <Icons>
-                  <i className="fa-solid fa-sort-up"></i>
-                  <i className="fa-solid fa-sort-down"></i>
+                  <i className={`fa-solid ${getIconClass('birthday')}`} />
                 </Icons>
               </HeadersZone>
             </Headers>
@@ -182,8 +188,7 @@ function Table(employees) {
               <HeadersZone>
                 Street{' '}
                 <Icons>
-                  <i className="fa-solid fa-sort-up"></i>
-                  <i className="fa-solid fa-sort-down"></i>
+                  <i className={`fa-solid ${getIconClass('street')}`} />
                 </Icons>
               </HeadersZone>
             </Headers>
@@ -191,8 +196,7 @@ function Table(employees) {
               <HeadersZone>
                 City{' '}
                 <Icons>
-                  <i className="fa-solid fa-sort-up"></i>
-                  <i className="fa-solid fa-sort-down"></i>
+                  <i className={`fa-solid ${getIconClass('city')}`} />
                 </Icons>
               </HeadersZone>
             </Headers>
@@ -200,8 +204,7 @@ function Table(employees) {
               <HeadersZone>
                 State{' '}
                 <Icons>
-                  <i className="fa-solid fa-sort-up"></i>
-                  <i className="fa-solid fa-sort-down"></i>
+                  <i className={`fa-solid ${getIconClass('state')}`} />
                 </Icons>
               </HeadersZone>
             </Headers>
@@ -209,8 +212,7 @@ function Table(employees) {
               <HeadersZone>
                 zip Code{' '}
                 <Icons>
-                  <i className="fa-solid fa-sort-up"></i>
-                  <i className="fa-solid fa-sort-down"></i>
+                  <i className={`fa-solid ${getIconClass('zipCode')}`} />
                 </Icons>
               </HeadersZone>
             </Headers>
@@ -246,35 +248,4 @@ export default Table;
 /* module.exports = {
   EmployeesList: Table,
 };
- */
-/* 
-// fonction de tri par Popularité (+ de like à - de like )
-    filteredEmployees.sort((a, b) => a.firstName.localeCompare(b.firstName));
-
-const popularitySort = (tabMedia) => {
-  tabMedia.sort((a, b) => b.likes - a.likes);
-};
-// fonction de tri par date (+ ancien au + récent)
-const dateSort = (tabMedia) => {
-  tabMedia.sort((a, b) => new Date(a.date) - new Date(b.date));
-};
-// fonction de tri par titre (ordre alphabétique)
-const titleSort = (tabMedia) => {
-  tabMedia.sort((a, b) => a.title.localeCompare(b.title));
-};
- */
-
-/*   const sortFName = (e) => {
-    console.log(
-      'order',
-      filteredEmployees.sort((a, b) => a.firstName.localeCompare(b.firstName))
-    );
-
-    /*     console.log(
-      'no order',
-      filteredEmployees.sort((a, b) => b.firstName.localeCompare(a.firstName))
-    );
- 
-    // tableContent.innerHTML = '';
-  };
  */
