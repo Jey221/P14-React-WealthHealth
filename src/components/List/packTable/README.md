@@ -3,7 +3,7 @@
 # Description
 
 ```js
-package npm pour le composant tableau
+package npm pour le composant tableau version 1.0.1
 ```
 
 # Création d'un tableau pour lister les employés inscrits
