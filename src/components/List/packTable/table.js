@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
-// mise en forme du tableau
+// MISE EN FORME
 const TableEmployee = styled.div`
   background-color: #80808085;
   margin: auto;
@@ -66,6 +66,7 @@ function Table(employees) {
   // récupération des datas
   const listEmployees = employees.employees.employees;
 
+  /*********************************RECHERCHE**********************************************/
   // mise en place hook pour la saisie ds la barre de recherche
   const [searchField, setSearchField] = useState('');
 
@@ -93,6 +94,7 @@ function Table(employees) {
     setSearchField(e.target.value);
   };
 
+  /*********************************TRI**********************************************/
   //mise en place d'un hook pour configurer le tri
   const [sortConfig, setSortConfig] = useState({
     key: null,
@@ -143,51 +145,50 @@ function Table(employees) {
     return sortedData;
   };
 
+  /*********************************PAGINATION**********************************************/
   //mise en place de la pagination
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowPerPage] = useState(5);
 
+  //calcul du nombre de page
   const pages = [];
   for (let i = 1; i <= Math.ceil(sortedData().length / rowsPerPage); i++) {
     pages.push(i);
   }
 
+  //mise en place des limites
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+
+  //création d'un array de la liste actuel
   const currentRow = sortedData().slice(indexOfFirstRow, indexOfLastRow);
 
-  console.log(currentRow);
-  console.log(sortedData());
-
-  /*   const handleShow5 = () =>{
-    setRowPerPage(rowsPerPage.length=5)
-  }
-  handleShow10
- */
+  //fonction pour choix de la page affiché
   const handlePage = (e) => {
-    console.log(e.target.value);
     setCurrentPage(Number(e.target.value));
   };
 
+  //fonction pour choix du nombre d'entrés affichés
   const handleShow = (e) => {
-    console.log(e.target.value);
-    console.log(rowsPerPage);
     setRowPerPage(e.target.value);
   };
+
+  //fonction page suivante
   const handleNextbtn = (e) => {
-    console.log('next');
     setCurrentPage(currentPage + 1);
     if (currentRow.length === 0) {
       setCurrentPage(currentPage - 1);
     }
   };
+
+  //fonction page précédente
   const handlePrevbtn = (e) => {
-    console.log('prev');
     setCurrentPage(currentPage - 1);
     if (currentRow.length === 0) {
       setCurrentPage(currentPage + 1);
     }
   };
+
   return (
     <TableEmployee>
       <SearchZone>
@@ -340,30 +341,4 @@ export default Table;
 /* module.exports = {
   EmployeesList: Table,
 };
- */
-
-/* 
-
-<nav>
-  <button></button>
-    <select>
-      <option>1</option>
-    </select>
-  <button></button>
-</nav>
-*/
-
-/*           <select
-            name="departement"
-            id="departement"
-            value={employeeInfo.departement}
-            onChange={onChange}
-            required
-          >
-            <option>Sales</option>
-            <option>Marketing</option>
-            <option>Engineering</option>
-            <option>Human Resources</option>
-            <option>Legal</option>
-          </select>
  */
