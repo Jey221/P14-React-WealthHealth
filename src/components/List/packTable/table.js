@@ -42,7 +42,20 @@ const Icons = styled.span`
 const TableBody = styled.tbody`
   background-color: #b3d31da3;
 `;
-const IndexEmployees = styled.div`
+const IndexZone = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`;
+const NavZone = styled.nav``;
+const SelectZone = styled.div`
+  display: flex;
+`;
+const SelectEntrie = styled.select`
+  height: 23px;
+  margin: auto;
+`;
+const IndexEmployees = styled.p`
   display: flex;
   justify-content: flex-end;
   padding: 0 3%;
@@ -130,6 +143,51 @@ function Table(employees) {
     return sortedData;
   };
 
+  //mise en place de la pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const [rowsPerPage, setRowPerPage] = useState(5);
+
+  const pages = [];
+  for (let i = 1; i <= Math.ceil(sortedData().length / rowsPerPage); i++) {
+    pages.push(i);
+  }
+
+  const indexOfLastRow = currentPage * rowsPerPage;
+  const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+  const currentRow = sortedData().slice(indexOfFirstRow, indexOfLastRow);
+
+  console.log(currentRow);
+  console.log(sortedData());
+
+  /*   const handleShow5 = () =>{
+    setRowPerPage(rowsPerPage.length=5)
+  }
+  handleShow10
+ */
+  const handlePage = (e) => {
+    console.log(e.target.value);
+    setCurrentPage(Number(e.target.value));
+  };
+
+  const handleShow = (e) => {
+    console.log(e.target.value);
+    console.log(rowsPerPage);
+    setRowPerPage(e.target.value);
+  };
+  const handleNextbtn = (e) => {
+    console.log('next');
+    setCurrentPage(currentPage + 1);
+    if (currentRow.length === 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+  const handlePrevbtn = (e) => {
+    console.log('prev');
+    setCurrentPage(currentPage - 1);
+    if (currentRow.length === 0) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
   return (
     <TableEmployee>
       <SearchZone>
@@ -219,8 +277,8 @@ function Table(employees) {
           </tr>
         </TableHead>
         <TableBody id="tableContent">
-          {sortedData().map((employee) => (
-            <tr className="employeeList" key={employee.firstName}>
+          {currentRow.map((employee) => (
+            <tr className="employeeList" key={employee.lastName}>
               <td>{employee.firstName}</td>
               <td>{employee.lastName}</td>
               <td>{employee.startDate}</td>
@@ -234,11 +292,45 @@ function Table(employees) {
           ))}
         </TableBody>
       </TableList>
-      <IndexEmployees>
-        <p>
-          Showing 1 to {filteredEmployees.length} of {filteredEmployees.length}
-        </p>
-      </IndexEmployees>
+      <IndexZone>
+        <SelectZone>
+          <p>Show: </p>
+          <SelectEntrie
+            name="selectEntrie"
+            id="selectEntrie"
+            onChange={handleShow}
+          >
+            <option>5</option>
+            <option>10</option>
+            <option>15</option>
+            <option>20</option>
+            <option>25</option>
+          </SelectEntrie>
+          <p> entries</p>
+        </SelectZone>
+        <NavZone>
+          <button onClick={handlePrevbtn}>prev</button>
+          <select
+            name="indexPage"
+            id="indexPage"
+            onChange={(e) => handlePage(e)}
+            value={currentPage}
+          >
+            {pages.map((page) => {
+              return (
+                <option value={page} key={page}>
+                  {page}
+                </option>
+              );
+            })}
+          </select>
+          <button onClick={handleNextbtn}>next</button>
+        </NavZone>
+
+        <IndexEmployees>
+          Showing 1 to {rowsPerPage} of {filteredEmployees.length}
+        </IndexEmployees>
+      </IndexZone>
     </TableEmployee>
   );
 }
@@ -248,4 +340,30 @@ export default Table;
 /* module.exports = {
   EmployeesList: Table,
 };
+ */
+
+/* 
+
+<nav>
+  <button></button>
+    <select>
+      <option>1</option>
+    </select>
+  <button></button>
+</nav>
+*/
+
+/*           <select
+            name="departement"
+            id="departement"
+            value={employeeInfo.departement}
+            onChange={onChange}
+            required
+          >
+            <option>Sales</option>
+            <option>Marketing</option>
+            <option>Engineering</option>
+            <option>Human Resources</option>
+            <option>Legal</option>
+          </select>
  */
