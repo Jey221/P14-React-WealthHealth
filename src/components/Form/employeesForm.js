@@ -102,7 +102,6 @@ export default function EmployeesForm({ addEmployee }) {
             onChange={onChange}
             required
           />
-
           <label htmlFor="start-date">Start Date</label>
           <input
             id="start-date"
