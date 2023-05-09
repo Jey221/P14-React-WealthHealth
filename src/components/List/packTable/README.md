@@ -1,13 +1,28 @@
-## package table
+## package packTable version 1.0.1
 
 # Description
 
-```js
-package npm pour le composant tableau version 1.0.1
-```
+This package is a part of the project 14 of the OpenClassrooms "Front End Developer" courses.
+For this one I had to turn an old JQuery website into a full react app.
 
-# Création d'un tableau pour lister les employés inscrits
+If you want to see the rest of the project it's right there :https://github.com/Jey221/front
+I choose to make a react table component as an npm package.
 
-```js
-const package = require('packtable');
-```
+
+# Requirements
+
+node: v16.13.2
+react: 18.2.0
+styled-components: 5.3.10
+
+# Installation
+run the following command:
+`npm i packtable`
+
+you need to define the following useState `const [employees, updateEmployees] = useState([])` where you use the component
+
+# Dependencies
+- React :
+  - react 18.2.0
+  - react-dom 18.2.0
+- styled-components: 5.3.10
