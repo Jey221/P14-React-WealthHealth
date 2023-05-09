@@ -28,11 +28,16 @@ const TableHead = styled.thead`
 `;
 const Headers = styled.th`
   align-items: center;
+  padding: 1%;
 `;
 const HeadersZone = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+const IconsDefault = styled.span`
+  display: flex;
+  flex-direction: column;
 `;
 const Icons = styled.span`
   display: flex;
@@ -100,9 +105,12 @@ function Table(employees) {
     key: null,
     direction: 'ascending',
   });
-
   // écouteur sur entête de colonne et définition des directions de tri
   const handleSort = (key) => {
+    console.log();
+    const iconDefault = document.getElementById(`${key}IconDefault`);
+    iconDefault.style.display = 'none';
+
     let direction = 'ascending';
     if (sortConfig.key === key && sortConfig.direction === 'ascending') {
       direction = 'descending';
@@ -172,20 +180,21 @@ function Table(employees) {
   const handleShow = (e) => {
     setRowPerPage(e.target.value);
   };
-
   //fonction page suivante
-  const handleNextbtn = (e) => {
-    setCurrentPage(currentPage + 1);
-    if (currentRow.length === 0) {
-      setCurrentPage(currentPage - 1);
+  const handleNextbtn = () => {
+    if (currentPage === pages.length) {
+      return null;
+    } else {
+      setCurrentPage(currentPage + 1);
     }
   };
 
   //fonction page précédente
-  const handlePrevbtn = (e) => {
-    setCurrentPage(currentPage - 1);
-    if (currentRow.length === 0) {
-      setCurrentPage(currentPage + 1);
+  const handlePrevbtn = () => {
+    if (currentPage === 1) {
+      return null;
+    } else {
+      setCurrentPage(currentPage - 1);
     }
   };
 
@@ -207,6 +216,10 @@ function Table(employees) {
               <HeadersZone>
                 First Name
                 <Icons>
+                  <IconsDefault id="firstNameIconDefault">
+                    <i className={`fa-solid fa-sort-up`} />
+                    <i className={`fa-solid fa-sort-down`} />
+                  </IconsDefault>
                   <i className={`fa-solid ${getIconClass('firstName')}`} />
                 </Icons>
               </HeadersZone>
@@ -215,6 +228,11 @@ function Table(employees) {
               <HeadersZone>
                 Last Name
                 <Icons>
+                  <IconsDefault id="lastNameIconDefault">
+                    <i className={`fa-solid fa-sort-up`} />
+                    <i className={`fa-solid fa-sort-down`} />
+                  </IconsDefault>
+
                   <i className={`fa-solid ${getIconClass('lastName')}`} />
                 </Icons>
               </HeadersZone>
@@ -223,6 +241,11 @@ function Table(employees) {
               <HeadersZone>
                 Start Date
                 <Icons>
+                  <IconsDefault id="startDateIconDefault">
+                    <i className={`fa-solid fa-sort-up`} />
+                    <i className={`fa-solid fa-sort-down`} />
+                  </IconsDefault>
+
                   <i className={`fa-solid ${getIconClass('startDate')}`} />
                 </Icons>
               </HeadersZone>
@@ -231,6 +254,11 @@ function Table(employees) {
               <HeadersZone>
                 Departement{' '}
                 <Icons>
+                  <IconsDefault id="departementIconDefault">
+                    <i className={`fa-solid fa-sort-up`} />
+                    <i className={`fa-solid fa-sort-down`} />
+                  </IconsDefault>
+
                   <i className={`fa-solid ${getIconClass('departement')}`} />
                 </Icons>
               </HeadersZone>
@@ -239,6 +267,11 @@ function Table(employees) {
               <HeadersZone>
                 Date of Birth{' '}
                 <Icons>
+                  <IconsDefault id="birthdayIconDefault">
+                    <i className={`fa-solid fa-sort-up`} />
+                    <i className={`fa-solid fa-sort-down`} />
+                  </IconsDefault>
+
                   <i className={`fa-solid ${getIconClass('birthday')}`} />
                 </Icons>
               </HeadersZone>
@@ -247,6 +280,11 @@ function Table(employees) {
               <HeadersZone>
                 Street{' '}
                 <Icons>
+                  <IconsDefault id="streetIconDefault">
+                    <i className={`fa-solid fa-sort-up`} />
+                    <i className={`fa-solid fa-sort-down`} />
+                  </IconsDefault>
+
                   <i className={`fa-solid ${getIconClass('street')}`} />
                 </Icons>
               </HeadersZone>
@@ -255,6 +293,11 @@ function Table(employees) {
               <HeadersZone>
                 City{' '}
                 <Icons>
+                  <IconsDefault id="cityIconDefault">
+                    <i className={`fa-solid fa-sort-up`} />
+                    <i className={`fa-solid fa-sort-down`} />
+                  </IconsDefault>
+
                   <i className={`fa-solid ${getIconClass('city')}`} />
                 </Icons>
               </HeadersZone>
@@ -263,6 +306,11 @@ function Table(employees) {
               <HeadersZone>
                 State{' '}
                 <Icons>
+                  <IconsDefault id="stateIconDefault">
+                    <i className={`fa-solid fa-sort-up`} />
+                    <i className={`fa-solid fa-sort-down`} />
+                  </IconsDefault>
+
                   <i className={`fa-solid ${getIconClass('state')}`} />
                 </Icons>
               </HeadersZone>
@@ -271,6 +319,10 @@ function Table(employees) {
               <HeadersZone>
                 zip Code{' '}
                 <Icons>
+                  <IconsDefault id="zipCodeIconDefault">
+                    <i className={`fa-solid fa-sort-up`} />
+                    <i className={`fa-solid fa-sort-down`} />
+                  </IconsDefault>
                   <i className={`fa-solid ${getIconClass('zipCode')}`} />
                 </Icons>
               </HeadersZone>
@@ -280,15 +332,15 @@ function Table(employees) {
         <TableBody id="tableContent">
           {currentRow.map((employee) => (
             <tr className="employeeList" key={employee.lastName}>
-              <td>{employee.firstName}</td>
-              <td>{employee.lastName}</td>
-              <td>{employee.startDate}</td>
-              <td>{employee.departement}</td>
-              <td>{employee.birthday}</td>
-              <td>{employee.street}</td>
+              <td style={{ padding: '1%' }}>{employee.firstName}</td>
+              <td style={{ padding: '1%' }}>{employee.lastName}</td>
+              <td style={{ padding: '1%' }}>{employee.startDate}</td>
+              <td style={{ padding: '1%' }}>{employee.departement}</td>
+              <td style={{ padding: '1%' }}>{employee.birthday}</td>
+              <td style={{ padding: '1%' }}>{employee.street}</td>
               <td>{employee.city}</td>
-              <td>{employee.state}</td>
-              <td>{employee.zipCode}</td>
+              <td style={{ padding: '1%' }}>{employee.state}</td>
+              <td style={{ padding: '1%' }}>{employee.zipCode}</td>
             </tr>
           ))}
         </TableBody>
