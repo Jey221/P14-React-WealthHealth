@@ -1,11 +1,11 @@
 {
   "name": "packtable",
   "version": "1.0.1",
-  "description": "",
+  "description": "table to list employees with the ability to sort, search and change the view by page",
   "main": "table.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Jeremy Koundour",
   "license": "ISC"
 }
