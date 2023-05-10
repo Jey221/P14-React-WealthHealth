@@ -1,6 +1,6 @@
 {
   "name": "packtable",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "table to list employees with the ability to sort, search and change the view by page",
   "main": "table.js",
   "scripts": {
