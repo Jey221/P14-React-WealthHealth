@@ -5,7 +5,8 @@
 This package is a part of the project 14 of the OpenClassrooms "Front End Developer" courses.
 For this one I had to turn an old JQuery website into a full react app.
 
-If you want to see the rest of the project it's right there :https://github.com/Jey221/front
+If you want to see the rest of the project it's right there : https://github.com/Jey221/front
+the React component on npm as a package : https://www.npmjs.com/package/packtable
 I choose to make a react table component as an npm package.
 
 # Requirements
