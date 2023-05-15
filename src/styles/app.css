@@ -86,6 +86,11 @@ legend {
 fieldset {
   margin: 3% 0;
 }
+.errorMessage {
+  color: red;
+  margin: 0%;
+  font-size: 11px;
+}
 /*LIST*/
 .List {
   margin: auto;

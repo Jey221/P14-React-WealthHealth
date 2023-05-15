@@ -70,6 +70,7 @@ const IndexEmployees = styled.p`
 function Table(employees) {
   // récupération des datas
   const listEmployees = employees.employees.employees;
+  console.log(listEmployees);
 
   /*********************************RECHERCHE**********************************************/
   // mise en place hook pour la saisie ds la barre de recherche

@@ -3,7 +3,9 @@ import States from '../../data/states.json';
 import { Box, Modal, Typography } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
+import { useForm } from 'react-hook-form';
 
+//mise en formes
 const theme = createTheme({
   palette: {
     neutral: {
@@ -13,8 +15,22 @@ const theme = createTheme({
   },
 });
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  pt: 2,
+  px: 4,
+  pb: 3,
+};
+
 export default function EmployeesForm({ addEmployee }) {
-  // récupération des inputs via useState()
+  /*// récupération des inputs via useState()
   const [employeeInfo, setEmployeeInfo] = useState({
     firstName: '',
     lastName: '',
@@ -28,7 +44,7 @@ export default function EmployeesForm({ addEmployee }) {
   });
 
   // envoi du formulaire dans le localStorage
-  const handleSubmit = (e) => {
+   const handleSubmit = (e) => {
     e.preventDefault();
     addEmployee(employeeInfo);
     handleOpen();
@@ -43,11 +59,38 @@ export default function EmployeesForm({ addEmployee }) {
       departement: '',
     });
   };
+
   // ecouteur sur la saisie
   const onChange = (e) => {
     setEmployeeInfo({ ...employeeInfo, [e.target.name]: e.target.value });
   };
-  // Modal de creation d'employée
+ */
+  /*   const [employeeInfo, setEmployeeInfo] = useState({
+    firstName: '',
+    lastName: '',
+    birthday: '',
+    startDate: '',
+    street: '',
+    city: '',
+    state: '',
+    zipCode: '',
+    departement: '',
+  });
+ */
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
+
+  function onSubmit(data) {
+    // setEmployeeInfo(data);
+    handleOpen();
+    addEmployee(data);
+    document.forms['employeeForm'].reset();
+  }
+
+  // Modal de creation d'employée ok
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -55,69 +98,63 @@ export default function EmployeesForm({ addEmployee }) {
   const handleClose = () => {
     setOpen(false);
   };
-  const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    pt: 2,
-    px: 4,
-    pb: 3,
-  };
 
   return (
     <div>
-      <form id="createEmployee" name="employeeForm" onSubmit={handleSubmit}>
+      <form
+        id="createEmployee"
+        name="employeeForm"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <Typography className="form">
           <label htmlFor="first-name">First Name</label>
           <input
             type="text"
             id="first-name"
             name="firstName"
-            value={employeeInfo.firstName}
-            onChange={onChange}
-            required
+            {...register('firstName', { required: true, minLength: 2 })}
           />
+          {errors.firstName && (
+            <p className="errorMessage">Firstname is required</p>
+          )}
 
           <label htmlFor="last-name">Last Name</label>
           <input
             type="text"
             id="last-name"
             name="lastName"
-            value={employeeInfo.lastName}
-            onChange={onChange}
-            required
+            {...register('lastName', { required: true, minLength: 2 })}
           />
+          {errors.lastName && (
+            <p className="errorMessage">Lastname is required</p>
+          )}
 
           <label htmlFor="date-of-birth">Date of Birth</label>
           <input
             id="date-of-birth"
             type="date"
             name="birthday"
-            value={employeeInfo.birthday}
-            onChange={onChange}
-            required
+            {...register('birthday', { required: true })}
           />
+          {errors.birthday && (
+            <p className="errorMessage">Date of birth is required</p>
+          )}
+
           <label htmlFor="start-date">Start Date</label>
           <input
             id="start-date"
             type="date"
             name="startDate"
-            value={employeeInfo.startDate}
-            onChange={onChange}
-            required
+            {...register('startDate', { required: true })}
           />
+          {errors.startDate && (
+            <p className="errorMessage">Start date is required</p>
+          )}
           <label htmlFor="departement">Department</label>
           <select
             name="departement"
             id="departement"
-            value={employeeInfo.departement}
-            onChange={onChange}
-            required
+            {...register('departement', { required: true })}
           >
             <option>Sales</option>
             <option>Marketing</option>
@@ -125,8 +162,10 @@ export default function EmployeesForm({ addEmployee }) {
             <option>Human Resources</option>
             <option>Legal</option>
           </select>
+          {errors.departement && (
+            <p className="errorMessage">Departement is required</p>
+          )}
         </Typography>
-
         <fieldset>
           <legend>
             <Typography variant="subtitle2">Address</Typography>
@@ -137,22 +176,28 @@ export default function EmployeesForm({ addEmployee }) {
               id="street"
               type="text"
               name="street"
-              value={employeeInfo.street}
-              onChange={onChange}
-              required
+              {...register('street', { required: true })}
             />
-
+            {errors.street && (
+              <p className="errorMessage">Street is required</p>
+            )}
             <label htmlFor="city">City</label>
             <input
               id="city"
               type="text"
               name="city"
-              value={employeeInfo.city}
-              onChange={onChange}
-              required
+              {...register('city', { required: true, minLength: 2 })}
             />
+            {errors.city && (
+              <p className="errorMessage">City date is required</p>
+            )}
+
             <label htmlFor="state">State</label>
-            <select name="state" id="state" onChange={onChange} required>
+            <select
+              name="state"
+              id="state"
+              {...register('state', { required: true })}
+            >
               {States.map((state) => {
                 return (
                   <option value={state.abbreviation} key={state.abbreviation}>
@@ -161,16 +206,18 @@ export default function EmployeesForm({ addEmployee }) {
                 );
               })}
             </select>
+            {errors.state && <p className="errorMessage">State is required</p>}
 
             <label htmlFor="zip-code">Zip Code</label>
             <input
               id="zip-code"
               type="number"
               name="zipCode"
-              value={employeeInfo.zipCode}
-              onChange={onChange}
-              required
+              {...register('zipCode', { required: true })}
             />
+            {errors.zipCode && (
+              <p className="errorMessage">Zip Code is required</p>
+            )}
           </Typography>
         </fieldset>
         <ThemeProvider theme={theme}>
