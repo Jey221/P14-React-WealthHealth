@@ -70,7 +70,6 @@ const IndexEmployees = styled.p`
 function Table(employees) {
   // récupération des datas
   const listEmployees = employees.employees.employees;
-  console.log(listEmployees);
 
   /*********************************RECHERCHE**********************************************/
   // mise en place hook pour la saisie ds la barre de recherche
@@ -108,7 +107,6 @@ function Table(employees) {
   });
   // écouteur sur entête de colonne et définition des directions de tri
   const handleSort = (key) => {
-    console.log();
     const iconDefault = document.getElementById(`${key}IconDefault`);
     iconDefault.style.display = 'none';
 
@@ -390,8 +388,3 @@ function Table(employees) {
 }
 
 export default Table;
-
-/* module.exports = {
-  EmployeesList: Table,
-};
- */
